@@ -85,11 +85,10 @@ Här börjar VÅR kod.
 
 .custom-header {
   position: relative;
-  background-image: url('assets/Legos_Wallpaper_Webshop.jpg');
+  background-image: url('../assets/Legos_Wallpaper_Webshop.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: white;
   height: 300px;
 }
 
