@@ -1,52 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>Produktinfo</title>
-    <link rel="stylesheet" href="css.styles.css" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
+
+    <!-- Navigation, samma som på index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="index.html">Cool Parents!</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+              <li class="nav-item"><a class="nav-link" href="index.html">Startsida</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Om Oss</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Produkt -->
     <main class="container py-5"></main>
     <h1 id="product-title">Produktnamn</h1>
-    <img id="product-image" src="" alt="" style="max-width: 500px" />
+    <img id="product-image" src="" alt="Produktbild" class="img-fluid mb-4" style="max-width: 500px;" />
     <p id="product ">Oscar the Grouch gossedjur. Oscar blir glad av att vara sur, men blir sur av att blir glad.</p>
+    
+    <hr />
 
-    <h2>Fyll i dina uppgifter för att köpa</h2>
+    <h2>Fyll i dina kunduppgifter för att beställa din produkt</h2>
+
     <form>
-      <label for="name">Namn:</label><br />
-      <input type="text" id="name" name="name" required /><br /><br />
+      <div class="mb-3">
+        <label for="name" class="form-label">Namn:</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
 
-      <label for="street-adress">Gatuadress:</label><br />
-      <input type="text" id="address" name="address" required /><br /><br />
+      <div class="mb-3">
+        <label for="name" class="form-label">Gatuadress:</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
 
-      <label for="zip-code">Postnummer:</label><br />
-      <input type="text" id="address" name="address" required /><br /><br />
-      
-      <label for="city">Stad:</label><br />
-      <input type="text" id="address" name="address" required /><br /><br />
+      <div class="mb-3">
+        <label for="name" class="form-label">Postnummer:</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
 
-      <label for="phone">Telefonnummer:</label><br />
-      <input type="tel" id="phone" name="phone" required /><br /><br />
+      <div class="mb-3">
+        <label for="name" class="form-label">Stad:</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
 
-      <label for="email">E-post:</label><br />
-      <input type="email" id="email" name="email" required /><br /><br />
+      <div class="mb-3">
+        <label for="name" class="form-label">Telefonnummer:</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
 
-      <button type="submit">Skicka beställning</button>
+      <div class="mb-3">
+        <label for="name" class="form-label">E-post:</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
+
+      <button type="submit" class="btn btn-dark">Skicka beställning</button>
     </form>
   </main>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get('name');
-    const image = params.get('image');
-    const description = params.get('description');
+  <!-- Footer -->
+  <footer class="py-5 bg-primary">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Cool Parents 2025</p>
+    </div>
+  </footer>
 
-    // Fyll i på sidan
-    if (name) document.getElementById('product-title').textContent = name;
-    if (image) document.getElementById('product-image').src = image;
-    if (description) document.getElementById('product-description').textContent = description;
-  </script>
-
-  </body>
+  <!-- Bootstrap core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Din egen scriptfil -->
+  <script src="scripts.js"></script>
+</body>
 </html>
