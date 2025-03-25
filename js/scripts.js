@@ -22,4 +22,73 @@
     }
 
 
+    /*
+    Jag har inte gjort postnummer eller telefon,
+    för det var jag lite mer osäker på hur jag skulle göra. 
+    */
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("order-form");
+        if (!form) return;
+      
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+      
+          let valid = true;
+      
+          const name = document.getElementById("name");
+          const address = document.getElementById("address");
+          const city = document.getElementById("city");
+          const email = document.getElementById("email");
+      
+          // Namn
+          if (name.value.length < 2 || name.value.length > 50) {
+            name.classList.add("is-invalid");
+            valid = false;
+          } else {
+            name.classList.remove("is-invalid");
+          }
+      
+          // Gatuadress
+          if (address.value.length < 2 || address.value.length > 50) {
+            address.classList.add("is-invalid");
+            valid = false;
+          } else {
+            address.classList.remove("is-invalid");
+          }
+      
+          // Stad
+          if (city.value.length < 2 || city.value.length > 50) {
+            city.classList.add("is-invalid");
+            valid = false;
+          } else {
+            city.classList.remove("is-invalid");
+          }
+      
+          // E-post
+          if (!email.value.includes("@") || email.value.length > 50) {
+            email.classList.add("is-invalid");
+            valid = false;
+          } else {
+            email.classList.remove("is-invalid");
+          }
+      
+          if (valid) {
+            alert("Tack för din beställning!");
+            form.reset();
+          }
+        });
+      });
+      
+
+
+
+
+
+
+
+
+
+
     
