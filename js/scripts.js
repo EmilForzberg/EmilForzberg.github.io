@@ -41,6 +41,14 @@
           const address = document.getElementById("address");
           const city = document.getElementById("city");
           const email = document.getElementById("email");
+          const zipcode = document.getElementById("zipcode");
+          const phone = document.getElementById("phone")
+
+          // Reguljära Uttryck (kallas Regex - best practice)
+          const zipcodeRegex = /^\d{5}$/; 
+          const phoneRegex = /^[0-9\-()+ ]{9,50}$/;
+          
+
       
           // Namn
           if (name.value.length < 2 || name.value.length > 50) {
@@ -73,7 +81,23 @@
           } else {
             email.classList.remove("is-invalid");
           }
-      
+
+          // Postnummer
+          if (!zipcodeRegex.test(zipcode.value)) {
+            zipcode.classList.add("is-invalid");
+            valid = false;
+          } else {
+            zipcode.classList.remove("is-invalid");
+          }
+
+          // Telefonnummer
+          if (!phoneRegex.test(phone.value)) {
+            phone.classList.add("is-invalid");
+            valid = false;
+          } else {
+            phone.classList.remove("is-invalid");
+          }
+          
           if (valid) {
             alert("Tack för din beställning!");
             form.reset();
