@@ -21,13 +21,7 @@
     if (description) document.getElementById('product-description').textContent = description;
     }
 
-
-    /*
-    Jag har inte gjort postnummer eller telefon,
-    för det var jag lite mer osäker på hur jag skulle göra. 
-    */
-
-
+    // Formulär. 
     document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("order-form");
         if (!form) return;
@@ -104,6 +98,40 @@
           }
         });
       });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const productsContainer = document.getElementById("products-container");
+    
+        if (!productsContainer) return;
+
+        fetch("https://fakestoreapi.com/products")
+            .then(res => res.json())
+            .then(products => {
+                products.forEach(product => {
+                    const productCard = `
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="${product.image}" alt="${product.title}" />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">${product.title}</h5>
+                                    ${product.price} $
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="product.html?id=${product.id}">KÖP</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    productsContainer.innerHTML += productCard;
+                });
+            })
+            .catch(error => console.error("Något gick fel med API-anropet:", error));
+    });
+    
       
 
 
