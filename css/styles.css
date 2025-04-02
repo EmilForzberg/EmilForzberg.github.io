@@ -139,6 +139,15 @@ body::before {
   background-color: white;
 }
 
+.card-body h5{
+  font-size: 0.65rem;
+}
+
+.card-body p{
+font-size: 0.75rem;
+max-height: 50px;
+}
+
 /*
 Här slutar VÅR kod. 
 */
