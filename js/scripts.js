@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const phoneRegex = /^[0-9\-()+ ]{9,50}$/;
 
 
-
     // Namn
     if (name.value.length < 2 || name.value.length > 50) {
       name.classList.add("is-invalid");
@@ -104,8 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 document.addEventListener("DOMContentLoaded", () => {
-  const productContainer = document.querySelector(".row-cols-2"); // Anpassa om din container har en annan klass
+  const productContainer = document.getElementById("product-list");
   const apiUrl = "https://fakestoreapi.com/products";
 
   // Hämta produkter från Fake Store API
@@ -116,25 +116,25 @@ document.addEventListener("DOMContentLoaded", () => {
       products.forEach(product => {
         // Skapa HTML för varje produkt
         const productHTML = `
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <img class="card-img-top" src="${product.image}" alt="${product.title}" />
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <h5 class="fw-bolder">${product.title}</h5>
-                                                <p>${product.price}  €</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark mt-auto" href="product.html?name=${encodeURIComponent(product.title)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}">KÖP</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-        productContainer.innerHTML += productHTML;
-      });
-    })
+              <div class="col mb-5">
+                  <div class="card h-100">
+                      <img class="card-img-top" src="${product.image}" alt="${product.title}">
+                      <div class="card-body p-4">
+                          <div class="text-center">
+                              <h5 class="fw-bolder">${product.title}</h5>
+                              <p>${product.price} €</p>
+                          </div>
+                      </div>
+                       <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                          <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="product.html?name=${encodeURIComponent(product.title)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}">KÖP</a>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+            `;
+          productContainer.innerHTML += productHTML;
+        });
+      })
     .catch(error => console.error("Fel vid hämtning av produkter:", error));
 });
