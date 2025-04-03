@@ -148,6 +148,23 @@ font-size: 0.75rem;
 max-height: 50px;
 }
 
+#product-description {
+  padding: 10px;
+  text-align: justify;
+  max-width: 500px;
+  margin: auto;
+  overflow-wrap: break-word;
+}
+
+#product-image {
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: contain;
+  margin: auto;
+  display: block;
+  padding: 10px;
+}
+
 /*
 Här slutar VÅR kod. 
 */

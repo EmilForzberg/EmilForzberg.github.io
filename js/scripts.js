@@ -14,20 +14,54 @@ if (window.location.pathname.includes("product.html")) {
   const name = params.get('name');
   const image = params.get('image');
   const description = params.get('description');
+  const price = params.get('price');
 
   // Fyll i på sidan
-  if (name) document.getElementById('product-title').textContent = name;
-  if (image) document.getElementById('product-image').src = image;
-  if (description) document.getElementById('product-description').textContent = description;
+  if (name) document.getElementById('product-title').textContent = decodeURIComponent(name);
+  if (image) document.getElementById('product-image').src = decodeURIComponent(image);
+  if (description) document.getElementById('product-description').textContent = decodeURIComponent(description);
+  if (price) document.getElementById('product-price').textContent = `Pris: ${price} €`;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const productContainer = document.getElementById("product-list");
+  const apiUrl = "https://fakestoreapi.com/products";
+  
+// Hämta produkter från Fake Store API
+if (productContainer) {
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(products => {
+    productContainer.innerHTML = ""; // Rensa gamla produkter om några finns
+    products.forEach(product => {
+      // Skapa HTML för varje produkt
+      const productHTML = `
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <img class="card-img-top" src="${product.image}" alt="${product.title}">
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">${product.title}</h5>
+                            <p>${product.price} €</p>
+                        </div>
+                    </div>
+                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                          <a class="btn btn-outline-dark mt-auto" href="product.html?name=${encodeURIComponent(product.title)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}&price=${product.price}">KÖP</a>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+          `;
+        productContainer.innerHTML += productHTML;
+      });
+    })
+  .catch(error => console.error("Fel vid hämtning av produkter:", error));
+}
+});
 
-/*
-Jag har inte gjort postnummer eller telefon,
-för det var jag lite mer osäker på hur jag skulle göra. 
-*/
 
-
+// KOD RELATERAT TILL FORMULÄR
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("order-form");
   if (!form) return;
@@ -43,11 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("email");
     const zipcode = document.getElementById("zipcode");
     const phone = document.getElementById("phone")
-
+    
     // Reguljära Uttryck (kallas Regex - best practice)
     const zipcodeRegex = /^\d{5}$/;
     const phoneRegex = /^[0-9\-()+ ]{9,50}$/;
-
 
     // Namn
     if (name.value.length < 2 || name.value.length > 50) {
@@ -104,37 +137,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const productContainer = document.getElementById("product-list");
-  const apiUrl = "https://fakestoreapi.com/products";
-
-  // Hämta produkter från Fake Store API
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(products => {
-      productContainer.innerHTML = ""; // Rensa gamla produkter om några finns
-      products.forEach(product => {
-        // Skapa HTML för varje produkt
-        const productHTML = `
-              <div class="col mb-5">
-                  <div class="card h-100">
-                      <img class="card-img-top" src="${product.image}" alt="${product.title}">
-                      <div class="card-body p-4">
-                          <div class="text-center">
-                              <h5 class="fw-bolder">${product.title}</h5>
-                              <p>${product.price} €</p>
-                          </div>
-                      </div>
-                       <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                          <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" href="product.html?name=${encodeURIComponent(product.title)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}">KÖP</a>
-                        </div>
-                      </div>
-                   </div>
-                </div>
-            `;
-          productContainer.innerHTML += productHTML;
-        });
-      })
-    .catch(error => console.error("Fel vid hämtning av produkter:", error));
-});
