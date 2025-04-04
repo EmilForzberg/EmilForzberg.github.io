@@ -139,19 +139,38 @@ body::before {
   background-color: white;
 }
 
-.card-body h5{
+.card-body h5 {
   font-size: 0.65rem;
 }
 
-.card-body p{
+.card-body p {
 font-size: 0.75rem;
 max-height: 50px;
+}
+
+.product-card {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media (min-width: 800px) {
+  .product-card{
+    width: 70%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .product-card {
+    width: 40%;
+  }
 }
 
 #product-description {
   padding: 10px;
   text-align: justify;
-  max-width: 500px;
+  max-width: 100%;
   margin: auto;
   overflow-wrap: break-word;
 }
