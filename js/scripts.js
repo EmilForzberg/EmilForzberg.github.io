@@ -24,17 +24,18 @@ if (window.location.pathname.includes("product.html")) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const productContainer = document.getElementById("product-list");
-  const apiUrl = "https://fakestoreapi.com/products";
+  const productContainer = document.getElementById("product-list"); // hämtar referens till html elementet där varorna ska visas: "product-list"
+  const apiUrl = "https://fakestoreapi.com/products"; // API URL för att hämta varorna
   
-// Hämta produkter från Fake Store API
-if (productContainer) {
-fetch(apiUrl)
-  .then(response => response.json())
-  .then(products => {
-    productContainer.innerHTML = ""; // Rensa gamla produkter om några finns
-    products.forEach(product => {
-      // Skapa HTML för varje produkt
+if (productContainer) { // kontroll och kör vidare om elementet finns
+fetch(apiUrl) // fetchar och startar en http get request till apiURL
+  .then(response => response.json()) // när det hämtats, tolka svaret som JSON
+  .then(products => {                // därefter går vidare med array objekt från APIt
+    productContainer.innerHTML = ""; // Rensa gamla varor om några finns
+    products.forEach(product => {    // Loopar igenom varje vara och bygger html 
+      // Skapas html struktur för alla varor från API
+      // Rad 50 skickar vidare till produktsidan där formuläret finns. Man skickas vidare när man klickat på köp
+      // encodeURI gör att inga specialtecken förstör länken såsom mellanslag åäö m.m.
       const productHTML = `
             <div class="col mb-5">
                 <div class="card h-100">
@@ -53,10 +54,10 @@ fetch(apiUrl)
                  </div>
               </div>
           `;
-        productContainer.innerHTML += productHTML;
+        productContainer.innerHTML += productHTML; // Lägg in html 
       });
     })
-  .catch(error => console.error("Fel vid hämtning av produkter:", error));
+  .catch(error => console.error("Fel vid hämtning av produkter:", error)); // error visas i consolen om något är fel
 }
 });
 
