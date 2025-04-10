@@ -8,7 +8,7 @@
 
 
 
-// Produktinfo
+// Produktinfo på produkt-sidan (product.html)
 if (window.location.pathname.includes("product.html")) {
   const params = new URLSearchParams(window.location.search);
   const name = params.get('name');
@@ -16,7 +16,8 @@ if (window.location.pathname.includes("product.html")) {
   const description = params.get('description');
   const price = params.get('price');
 
-  // Fyll i på sidan
+  // Fyller i produktinfo i rätt HTML-element
+  // decodeURIComponent används för att säkerställa att specialtecken i URL:en tolkas korrekt
   if (name) document.getElementById('product-title').textContent = decodeURIComponent(name);
   if (image) document.getElementById('product-image').src = decodeURIComponent(image);
   if (description) document.getElementById('product-description').textContent = decodeURIComponent(description);
@@ -68,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form) return;
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Förhindra att formuläret skickas direkt
 
     let valid = true;
 
@@ -79,11 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const zipcode = document.getElementById("zipcode");
     const phone = document.getElementById("phone")
     
-    // Reguljära Uttryck (kallas Regex - best practice)
+    // Reguljära Uttryck, Regex (BP), postnummer och telefonnummer
     const zipcodeRegex = /^\d{5}$/;
     const phoneRegex = /^[0-9\-()+ ]{9,50}$/;
 
-    // Namn
+    // Fältvalidering (namn, adress, stad, e-post, postnummer och telefonnummer)
+    // Lägger till "is-invalid"-klass om något är fel, vilket aktiverar Bootstrap-stilar
+
     if (name.value.length < 2 || name.value.length > 50) {
       name.classList.add("is-invalid");
       valid = false;
@@ -91,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
       name.classList.remove("is-invalid");
     }
 
-    // Gatuadress
     if (address.value.length < 2 || address.value.length > 50) {
       address.classList.add("is-invalid");
       valid = false;
@@ -99,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
       address.classList.remove("is-invalid");
     }
 
-    // Stad
     if (city.value.length < 2 || city.value.length > 50) {
       city.classList.add("is-invalid");
       valid = false;
@@ -107,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
       city.classList.remove("is-invalid");
     }
 
-    // E-post
     if (!email.value.includes("@") || email.value.length > 50) {
       email.classList.add("is-invalid");
       valid = false;
@@ -115,7 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
       email.classList.remove("is-invalid");
     }
 
-    // Postnummer
     if (!zipcodeRegex.test(zipcode.value)) {
       zipcode.classList.add("is-invalid");
       valid = false;
@@ -123,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
       zipcode.classList.remove("is-invalid");
     }
 
-    // Telefonnummer
     if (!phoneRegex.test(phone.value)) {
       phone.classList.add("is-invalid");
       valid = false;
@@ -133,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (valid) {
       alert("Tack för din beställning!");
-      form.reset();
+      form.reset(); // Återställ formuläret
     }
   });
 });
